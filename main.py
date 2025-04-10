@@ -37,7 +37,7 @@ def desfazer():
 def refazer():
     try:
         listaDeChavesDoHistoricoRefazer = list(historicoDesfazer.keys())
-        listaDeValoresDoHistoricoRefazer = list(historicoDesfazer.values())
+        listaDeValoresDoHistoricoRefazer = list(historicoDesfazer.values()) # cria a lista com as chaves, mas também outra separada com os valores do dict historico refazer
         ultimaChaveDoHistoricoRefazer = listaDeChavesDoHistoricoRefazer[len(listaDeChavesDoHistoricoRefazer) - 1]
         if 'adicionou' in ultimaChaveDoHistoricoRefazer:
             dictJson['tarefas'].pop(dictJson['tarefas'].index(listaDeValoresDoHistoricoRefazer[len(listaDeChavesDoHistoricoRefazer) - 1]))
