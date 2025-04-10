@@ -29,7 +29,6 @@ def desfazer():
     if 'adicionado' in ultimaChave:
         desfeito = dictJson['tarefas'].pop()
         historicoDesfazer[f'desfeito_excluiu_{desfeito}'] = desfeito
-        
         #\naqui ele exclui a última tarefa, e NÃO faz isso por meio da função excluir_item(), pois se chamasse a função pra fazer isso, a função registraria na ultimaAcao, aí ficaria num loop de desfazer o que foi desfeito, e não funcionaria legal
     elif 'excluido' in ultimaChave:
         dictJson['tarefas'].append(ultimaAcao[ultimaChave])
@@ -68,9 +67,6 @@ while True: #dentro do loop vai perguntar oq o usuário quer fazer e chamar as d
     elif ComandoInicial.startswith('R'):
         refazer()
         print(f'\nAqui está a lista atualizada:\n{dictJson}')
-
 with open('venv\sets.json', 'w+') as f:
     json.dump(dictJson, f)
 #Abre o arquivo json, salva todas as alterações feitas na dictJson, dentro do arquivo json em si, e depois fecha dnv o arquivo
-        
-        
