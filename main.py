@@ -20,7 +20,7 @@ def excluir_item(item):
         dictJson['tarefas'].pop(dictJson['tarefas'].index(item))
         ultimaAcao[f'excluido_{item}'] = item
         return dictJson
-    except ValueError:
+    except ValueError: #o value error é para se a pessoa tentar excluir uma tarefa que não existe na lista dela
         print('Este item não pode ser excluído, pois ele não existe')
 #função para excluir um item da lista, e salva a execução dessa ação no dict ultimaAcao
 def desfazer():
@@ -35,7 +35,7 @@ def desfazer():
         historicoDesfazer[f'desfeito_adicionou_{ultimaAcao[ultimaChave]}'] = ultimaAcao[ultimaChave]
         #adiciona o ultimo item que foi excluido, novamente, e NÃO chama a função adicionar_item() pelo mesmo motivo do comentário acima
 def refazer():
-    try:
+    try: 
         listaDeChavesDoHistoricoRefazer = list(historicoDesfazer.keys())
         listaDeValoresDoHistoricoRefazer = list(historicoDesfazer.values()) # cria a lista com as chaves, mas também outra separada com os valores do dict historico refazer
         ultimaChaveDoHistoricoRefazer = listaDeChavesDoHistoricoRefazer[len(listaDeChavesDoHistoricoRefazer) - 1] #a ultima chave vai ser a ultima coisa desfeita, se a função desfazer adicionou algo ou excluiu algo
@@ -43,9 +43,9 @@ def refazer():
             dictJson['tarefas'].pop(dictJson['tarefas'].index(listaDeValoresDoHistoricoRefazer[len(listaDeChavesDoHistoricoRefazer) - 1])) # se a função desfazer adicionou, o refazer vai retirar do dictJson, o valor doq foi adicionado, aí precisa ficar essa coisa feia e enorme, mas é só pra referenciar que é a tarefa excluida
             historicoDesfazer.pop(ultimaChaveDoHistoricoRefazer) # aqui ele tira a ação realizada no desfazer, do historico do desfazer ,pra evitar que a pessoa refaça duas vezes o mesmo desfazer, garantindo que só seja refeito uma vez, o que foi desfeito uma vez
         elif 'excluiu' in ultimaChaveDoHistoricoRefazer:
-            dictJson['tarefas'].append(historicoDesfazer[ultimaChaveDoHistoricoRefazer])
-            historicoDesfazer.pop(ultimaChaveDoHistoricoRefazer)
-    except IndexError:
+            dictJson['tarefas'].append(historicoDesfazer[ultimaChaveDoHistoricoRefazer]) # mesma coisa q ali em cima, mas dessa vez é para se no desfazer foi excluido, aí ele adiciona
+            historicoDesfazer.pop(ultimaChaveDoHistoricoRefazer) # tem q tirar a ação também, mesmo motivo do if acima
+    except IndexError: # o try e except é pra conferir erro de index do histórico, caso a pessoa tente refazer algo que não foi desfeito. 
         print('\nNão há o que refazer')
 while True: #dentro do loop vai perguntar oq o usuário quer fazer e chamar as devidas funções. Caso o usuário queira parar, usa o S para quebrar o laço e conseguir salvar o json no bloco abaixo
     ComandoInicial = input('\nSelecione um comando:\n[L]istar [A]dicionar [E]xcluir [D]esfazer [R]efazer [S]air e salvar\n\n').upper()
