@@ -1,4 +1,5 @@
 import json
+import os
 
 with open('venv\sets.json', 'r+') as arquivo:
     dictJson = json.load(arquivo)
@@ -67,6 +68,10 @@ while True: #dentro do loop vai perguntar oq o usuário quer fazer e chamar as d
     elif ComandoInicial.startswith('R'):
         refazer()
         print(f'\nAqui está a lista atualizada:\n{dictJson}')
+    elif ComandoInicial == 'CLEAR':
+        os.system('cls') #Vai depender do sistema operacional. no W10 é cls, no W11 é clear e no mac/linux é clear também, aí tem que alterar
+    else:
+        print('Digite um comando válido')
 with open('venv\sets.json', 'w+') as f:
     json.dump(dictJson, f)
 #Abre o arquivo json, salva todas as alterações feitas na dictJson, dentro do arquivo json em si, e depois fecha dnv o arquivo
