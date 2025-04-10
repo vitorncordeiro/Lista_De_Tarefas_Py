@@ -41,7 +41,7 @@ def refazer():
         ultimaChaveDoHistoricoRefazer = listaDeChavesDoHistoricoRefazer[len(listaDeChavesDoHistoricoRefazer) - 1] #a ultima chave vai ser a ultima coisa desfeita, se a função desfazer adicionou algo ou excluiu algo
         if 'adicionou' in ultimaChaveDoHistoricoRefazer:
             dictJson['tarefas'].pop(dictJson['tarefas'].index(listaDeValoresDoHistoricoRefazer[len(listaDeChavesDoHistoricoRefazer) - 1])) # se a função desfazer adicionou, o refazer vai retirar do dictJson, o valor doq foi adicionado, aí precisa ficar essa coisa feia e enorme, mas é só pra referenciar que é a tarefa excluida
-            historicoDesfazer.pop(ultimaChaveDoHistoricoRefazer)
+            historicoDesfazer.pop(ultimaChaveDoHistoricoRefazer) # aqui ele tira a ação realizada no desfazer, do historico do desfazer ,pra evitar que a pessoa refaça duas vezes o mesmo desfazer, garantindo que só seja refeito uma vez, o que foi desfeito uma vez
         elif 'excluiu' in ultimaChaveDoHistoricoRefazer:
             dictJson['tarefas'].append(historicoDesfazer[ultimaChaveDoHistoricoRefazer])
             historicoDesfazer.pop(ultimaChaveDoHistoricoRefazer)
