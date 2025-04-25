@@ -1,7 +1,8 @@
 import json
 import os
-
-with open('venv\sets.json', 'r+') as arquivo:
+from pathlib import Path
+caminho = Path(__file__).parent / 'sets.json'
+with open(caminho, 'r+') as arquivo:
     dictJson = json.load(arquivo)
 #Acima ele está abrindo e fechando o arquivo sets no modo leitura + escrita, que é o arquivo onde está salvo a lista de tarefas, e salvando todo seu conteúdo dentro da variável dictJson
 ultimaAcao = {} #variavel vazia para armazenar todas as adições ou exclusões feitas, armazenando se é exclusão ou adição na chave, e armazenando no valor, a tarefa(string do user) que foi adicionada/excluida
